@@ -63,11 +63,11 @@ sudo apt install -y \
 sudo systemctl enable docker
 sudo systemctl start docker
 
-# Add users to Docker group
+# Add Ubuntu user to Docker group
 sudo usermod -aG docker ubuntu
 
 # ------------------------------------------
-OBOBOB# 4. Install AWS CLI v2
+# 4. Install AWS CLI v2
 # ------------------------------------------
 echo "[4/8] Installing AWS CLI..."
 
@@ -89,17 +89,17 @@ echo "[5/8] Installing kubectl..."
 sudo mkdir -p -m 755 /etc/apt/keyrings
 
 curl -fsSL \
-OBOBOB    https://pkgs.k8s.io/core:/stable:/v1.36/deb/Release.key | \
+    https://pkgs.k8s.io/core:/stable:/v1.36/deb/Release.key | \
     sudo gpg --dearmor \
-OBOBOB    -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+    -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 
 sudo chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 
-OBOBOBecho \
+echo \
 "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] \
 https://pkgs.k8s.io/core:/stable:/v1.36/deb/ /" | \
 sudo tee /etc/apt/sources.list.d/kubernetes.list > /dev/null
-OBOBOB
+
 sudo apt update
 
 sudo apt install -y kubectl
@@ -111,16 +111,16 @@ echo "[6/8] Installing Jenkins..."
 
 sudo wget -O /etc/apt/keyrings/jenkins-keyring.asc \
     https://pkg.jenkins.io/debian-stable/jenkins.io-2026.key
-OBOBOB
+
 echo \
-OBOBOB"deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc] \
-OBOBOBhttps://pkg.jenkins.io/debian-stable binary/" | \
+"deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc] \
+https://pkg.jenkins.io/debian-stable binary/" | \
 sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
 
 sudo apt update
 
 sudo apt install -y jenkins
-OBOBOB
+
 # Allow Jenkins to use Docker
 sudo usermod -aG docker jenkins
 
@@ -135,13 +135,13 @@ echo ""
 echo "=========================================="
 echo " INSTALLATION VERIFICATION"
 echo "=========================================="
-OBOBOB
-OBOBOBecho ""
-echo "===== JAVA ====="
-OBOBOBjava -version
 
 echo ""
-OBOBOBecho "===== GIT ====="
+echo "===== JAVA ====="
+java -version
+
+echo ""
+echo "===== GIT ====="
 git --version
 
 echo ""
@@ -155,15 +155,15 @@ aws --version
 
 echo ""
 echo "===== KUBECTL ====="
-OBOBOBkubectl version --client
-
-OBOBOBecho ""
-echo "===== JENKINS ====="
-sudo systemctl is-active jenkins
-OBOBOBsudo systemctl is-enabled jenkins
+kubectl version --client
 
 echo ""
-OBOBOBecho "===== JENKINS PACKAGE ====="
+echo "===== JENKINS ====="
+sudo systemctl is-active jenkins
+sudo systemctl is-enabled jenkins
+
+echo ""
+echo "===== JENKINS PACKAGE ====="
 sudo dpkg -l | grep jenkins
 
 echo ""
