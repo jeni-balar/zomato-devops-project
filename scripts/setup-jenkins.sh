@@ -58,13 +58,13 @@ sudo apt install -y \
     docker-ce-cli \
     containerd.io \
     docker-buildx-plugin \
-OBOBOB    docker-compose-plugin
+    docker-compose-plugin
 
 sudo systemctl enable docker
-OBOBOBsudo systemctl start docker
+sudo systemctl start docker
 
 # Add users to Docker group
-OBOBOBsudo usermod -aG docker ubuntu
+sudo usermod -aG docker ubuntu
 
 # ------------------------------------------
 OBOBOB# 4. Install AWS CLI v2
