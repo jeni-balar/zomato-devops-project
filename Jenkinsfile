@@ -14,7 +14,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out source code...'
-
                 checkout scm
             }
         }
@@ -22,7 +21,6 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 echo 'Installing application dependencies...'
-
                 sh 'npm ci'
             }
         }
@@ -30,7 +28,6 @@ pipeline {
         stage('Run Tests') {
             steps {
                 echo 'Running application tests...'
-
                 sh 'CI=true npm test -- --watchAll=false --passWithNoTests'
             }
         }
@@ -38,7 +35,6 @@ pipeline {
         stage('Build React Application') {
             steps {
                 echo 'Building React application...'
-
                 sh 'npm run build'
             }
         }
@@ -117,23 +113,24 @@ pipeline {
                 echo 'Validating Kubernetes staging deployment...'
 
                 sh 'kubectl get pods -o wide'
-
                 sh 'kubectl get services'
-
                 sh 'kubectl get deployments'
             }
         }
 
-        stage('Promote to Production') {
+        stage('Deploy to Production') {
             steps {
-
-                input message: 'Staging validation passed. Promote this build to production?',
-                      ok: 'Deploy to Production'
-
-                echo 'Production promotion approved.'
+                echo 'Deploying validated build to production...'
 
                 sh """
-                    kubectl apply -f k8s/production/
+                    ACCOUNT_ID=\$(aws sts get-caller-identity \
+                    --query Account \
+                    --output text)
+
+                    kubectl apply -f k8s/
+
+                    kubectl set image deployment/zomato-app \
+                    zomato-app=\$ACCOUNT_ID.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:${IMAGE_TAG}
 
                     kubectl rollout status deployment/zomato-app \
                     --timeout=180s
