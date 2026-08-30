@@ -77,7 +77,7 @@ curl -fsSL \
 
 unzip -q awscliv2.zip
 
-sudo ./aws/install
+sudo ./aws/install --update
 
 rm -rf aws awscliv2.zip
 
