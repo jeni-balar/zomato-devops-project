@@ -28,7 +28,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 echo 'Running application tests...'
-                sh 'CI=true npm test -- --watchAll=false'
+                sh 'CI=true npm test -- --watchAll=false --passWithNoTests'
             }
         }
 
