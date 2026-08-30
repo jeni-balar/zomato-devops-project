@@ -1,0 +1,11 @@
+apiVersion: eks.amazonaws.com/v1
+kind: NodeClass
+metadata:
+  name: app-private
+spec:
+  role: zomato-eks-node-role
+  securityGroupSelectorTerms:
+    - id: sg-04c7662ef42760f4e
+  subnetSelectorTerms:
+    - id: subnet-0386aa63393eb5475
+    - id: subnet-055459b8137393949
