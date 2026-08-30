@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zomato-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: zomato-app
+  template:
+    metadata:
+      labels:
+        app: zomato-app
+    spec:
+      containers:
+        - name: zomato-app
+          image: 575441842835.dkr.ecr.ap-south-1.amazonaws.com/zomato-app:latest
+          ports:
+            - containerPort: 80

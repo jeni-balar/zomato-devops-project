@@ -5,7 +5,7 @@ pipeline {
     environment {
         AWS_REGION = 'ap-south-1'
         ECR_REPOSITORY = 'zomato-app'
-        EKS_CLUSTER = 'zomato-eks'
+        EKS_CLUSTER = 'zomato-eks-cluster'
         IMAGE_TAG = "${BUILD_NUMBER}"
     }
 
