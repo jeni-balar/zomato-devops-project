@@ -4,7 +4,7 @@ An end-to-end DevOps project that automates the build, containerization, image m
 
 ## 🏗️ Architecture
 
-![Zomato DevOps Architecture](./architecture/zomato-devops-architecture.png)
+![Zomato DevOps Architecture](./Architecture/zomato-devops-architecture.png)
 
 **GitHub → Jenkins → Docker → Amazon ECR → Amazon EKS → Kubernetes Service → Zomato Application**
 
