@@ -112,7 +112,7 @@ The monitoring stack also includes:
 
 For the complete step-by-step implementation with AWS screenshots, Kubernetes configuration, CI/CD pipeline, monitoring setup, verification, and troubleshooting:
 
-**[📄 View Project Implementation Report](./Report/Zomato_DevOps_Project_Report.pdf)**
+**[📄 View Project Implementation Report](./Report/Project-3_Zomato_DevOps_Project_Report.pdf)**
 
 ## 👩‍💻 Author
 
